@@ -1,11 +1,10 @@
 name: Checkout Build Artifact
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-
+  workflow_dispatch:
+  schedule:
+    # Runs "Every Sunday" (see https://crontab.guru)
+    - cron: '15 8 * * Sun'
 jobs:
   Checkout_Artifact_Scan:
 
