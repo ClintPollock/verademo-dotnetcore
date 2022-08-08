@@ -22,6 +22,7 @@ jobs:
     
     - name: Get Veracode SAST Pipeline Scanner
       run: |
-        curl https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip -o veracode.zip
-        unzip veracode.zip
+        curl https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
+        unzip pipeline-scan-LATEST.zip
+        ls -la
         java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}" --file "sast_results.zip" -jo true -so true --project_url https://www.github.com/$GITHUB_REPOSITORY -p $GITHUB_REPOSITORY -r $GITHUB_REF
