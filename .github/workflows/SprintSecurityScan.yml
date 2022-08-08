@@ -13,10 +13,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
         
 # Security Scan Sprint / Branch / Pull Request       
     
@@ -29,7 +25,7 @@ jobs:
     
     - name: Get Veracode SAST Pipeline Scanner
       run: 
-        java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}" --file "artifacts/VeraDemoDotNetCoreAppArtifact.zip" -so true --project_url https://www.github.com/$GITHUB_REPOSITORY -p $GITHUB_REPOSITORY -r $GITHUB_REF
+        java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}" --file "artifacts/VeraDemoDotNetCoreAppArtifact.zip" -so true --project_url https://www.github.com/$GITHUB_REPOSITORY -p $GITHUB_REPOSITORY -r $GITHUB_REF |
     
     - name: LS
       run: ls -la
@@ -39,4 +35,4 @@ jobs:
       with:
         # Artifact name
         name: SASTResults
-        path: sast_results.zip
+        path: results.zip
