@@ -1,0 +1,27 @@
+name: Veracode Governance Scan
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs "Every Sunday" (see https://crontab.guru)
+    - cron: '5 8 * * Sun'
+
+jobs:
+  Checkout_Artifact_Scan:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+        
+# Security Scan Sprint / Branch / Pull Request       
+    
+      - name: Get Veracode SAST Pipeline Scanner
+        run: |
+          curl https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip -o veracode.zip
+          unzip veracode.zip
+          java -jar ./dls/pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}" --file "result.zip" -jo true -so true --project_url https://www.github.com/$GITHUB_REPOSITORY -p $GITHUB_REPOSITORY -r $GITHUB_REF
