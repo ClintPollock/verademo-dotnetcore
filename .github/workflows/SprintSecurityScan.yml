@@ -34,4 +34,4 @@ jobs:
       with:
         # Artifact name
         name: SASTResults
-        path: results.zip
+        path: results.txt
