@@ -29,8 +29,11 @@ jobs:
     
     - name: Get Veracode SAST Pipeline Scanner
       run: 
-        java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}" --file "sast_results.zip" -jo true -so true --project_url https://www.github.com/$GITHUB_REPOSITORY -p $GITHUB_REPOSITORY -r $GITHUB_REF
-
+        java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}" --file "artifacts/VeraDemoDotNetCoreAppArtifact.zip" -so true --project_url https://www.github.com/$GITHUB_REPOSITORY -p $GITHUB_REPOSITORY -r $GITHUB_REF
+    
+    - name: LS
+      run: ls -la
+      
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
