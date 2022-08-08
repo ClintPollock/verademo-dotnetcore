@@ -7,16 +7,12 @@ on:
     - cron: '5 8 * * Sun'
 
 jobs:
-  Checkout_Artifact_Scan:
+  Veracode_Governance_Scan:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
         
 # Security Scan Mainline       
 
