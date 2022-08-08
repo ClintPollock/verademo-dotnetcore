@@ -12,10 +12,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+        
 # Security Scan        
 
-    - name: Pull Docker
+    - name: Directory List
       run: ls -la
       
     - name: Veracode SAST and SCA Governance Scan
