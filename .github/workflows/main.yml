@@ -1,0 +1,25 @@
+name: Veracode Governance Scan
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs "Every Sunday" (see https://crontab.guru)
+    - cron: '5 8 * * Sun'
+
+jobs:
+  Checkout_Artifact_Scan:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+# Security Scan        
+
+    - name: Veracode SAST and SCA Governance Scan
+      uses: veracode/veracode-uploadandscan-action@0.2.1
+      with:
+        appname: 'GitHub-VeraDemoDotNetCore'
+        createprofile: false
+        filepath: 'verademodotnetcore.zip'
+        vid: '${{ secrets.API_ID }}'
+        vkey: '${{ secrets.API_KEY }}'
