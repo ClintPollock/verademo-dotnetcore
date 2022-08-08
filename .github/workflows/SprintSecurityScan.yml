@@ -23,7 +23,7 @@ jobs:
     - name: Unzip the Pipeline Scanner
       run: unzip -n pipeline-scan-LATEST.zip
     
-    - name: Get Veracode SAST Pipeline Scanner
+    - name: Run Veracode SAST Pipeline Scanner
       run: java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}" --file "artifacts/VeraDemoDotNetCoreAppArtifact.zip" -so true --project_url https://www.github.com/$GITHUB_REPOSITORY -p $GITHUB_REPOSITORY -r $GITHUB_REF
     
     - name: LS
