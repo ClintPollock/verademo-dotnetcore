@@ -1,4 +1,4 @@
-name: Veracode Governance Scan
+name: Veracode Security Scan Sprint / Branch
 
 on:
   workflow_dispatch:
