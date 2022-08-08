@@ -20,6 +20,6 @@ jobs:
       with:
         appname: 'GitHub-VeraDemoDotNetCore'
         createprofile: false
-        filepath: 'artifats/VeraDemoDotNetCoreAppArtifact.zip'
+        filepath: 'artifacts/VeraDemoDotNetCoreAppArtifact.zip'
         vid: '${{ secrets.API_ID }}'
         vkey: '${{ secrets.API_KEY }}'
