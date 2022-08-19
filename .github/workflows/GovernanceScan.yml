@@ -10,19 +10,14 @@ jobs:
   Veracode_Governance_Scan:
 
     runs-on: ubuntu-latest
-
+    container: 
+      image: veracode/api-wrapper-java:latest
+      options: --user root
     steps:
     - uses: actions/checkout@v3
         
-# Security Scan Mainline       
+# Security Scan Mainline Branch / Goveranance SAST and SCA scan      
 
-    - name: Directory List
-      run: ls -la
-      
-    - name: Get Veracode
-      uses: wei/curl@master
-      with:
-        args: -sS -o VeracodeJavaAPI.jar "https://repo1.maven.org/maven2/com/veracode/vosp/api/wrappers/vosp-api-wrappers-java/19.6.5.8/vosp-api-wrappers-java-19.6.5.8.jar"
-
-    - name: Start SAST / SCA Governance Scan      
-      run: java -jar VeracodeJavaAPI.jar -action uploadandscan -vid ${{ secrets.VERACODE_API_ID }} -vkey ${{ secrets.VERACODE_API_KEY }} -appname GitHub-VeraDemoDotNetCore -createprofile true -version "GitHub Actions job $GITHUB_RUN_NUMBER" -filepath artifacts/VeraDemoDotNetCoreAppArtifact.zip
+    - name: scan
+      run: |
+        java -jar /opt/veracode/api-wrapper.jar -vid ${{secrets.VERACODE_ID}} -vkey ${{secrets.VERACODE_KEY}} -action UploadAndScan -createprofile false -appname GitHub-VeraDemoDotNetCore -version "${{ github.run_id }}" -filepath artifacts/VeraDemoDotNetCoreAppArtifact.zip
