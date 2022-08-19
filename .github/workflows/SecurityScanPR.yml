@@ -8,6 +8,7 @@
 name: Veracode Static Analysis Pipeline Scan
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '26 18 * * 0'
 
