@@ -25,6 +25,7 @@ jobs:
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
 # download the Veracode Static Analysis Pipeline scan jar
     - run: curl --silent --show-error --fail -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
     - run: unzip -o pipeline-scan-LATEST.zip
